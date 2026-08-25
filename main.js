@@ -10,14 +10,14 @@ const translations = {
     pageTitle: 'Cabañas Rivas Pezoa | Coñaripe', description: 'Cabañas Rivas Pezoa en Coñaripe. Descanso y reserva directa cerca del lago Calafquén y la Ruta Termal.',
     brandSubtitle: 'Cabañas · Coñaripe', navCabins: 'Cabañas', navExperience: 'Experiencia', navLocation: 'Ubicación', consult: 'Consultar', search: 'Buscar', searchAria: 'Abrir buscador',
     searchEyebrow: 'Explora el sitio', searchTitle: '¿Qué estás buscando?', searchPlaceholder: 'Cabañas, ubicación, actividades…', noResults: 'No encontramos resultados. Prueba con otra palabra.',
-    promoEyebrow: 'Beneficio exclusivo web', promoTitle: 'Obtén 5% de descuento', promoCopy: 'Reserva directamente por WhatsApp y menciona el código <strong>WEB5</strong> para acceder al descuento.', promoCta: 'Solicitar mi descuento <span>→</span>', promoLater: 'Quizás más tarde', promoTerms: 'Sujeto a disponibilidad. Reserva directa.', close: 'Cerrar',
+    promoEyebrow: 'Beneficio exclusivo web', promoTitle: 'Obtén 5% de descuento', promoCopy: 'Reserva directamente por WhatsApp y menciona el código <strong>WEB5</strong> para acceder al descuento.', promoCta: 'Solicitar mi descuento <span>→</span>', promoLater: 'Quizás más tarde', promoTerms: 'Sujeto a disponibilidad. Reserva directa.', instagramEyebrow: 'Síguenos en Instagram', instagramTitle: 'Inspírate para tu próxima estadía', instagramCopy: 'Descubre más fotos, novedades y rincones de Coñaripe en <strong>@cabanasrivaspezoa</strong>.', instagramCta: 'Seguir en Instagram <span>→</span>', instagramLater: 'Ahora no', close: 'Cerrar',
     sections: [['inicio','Inicio','Descanso en Coñaripe, lago Calafquén y Ruta Termal'],['cabanas','Nuestras cabañas','Cabañas acogedoras, familiares y reserva directa'],['experiencia','Experiencia','Naturaleza, playa, termas, cultura y excursiones'],['ubicacion','Ubicación','Cómo llegar a Cabañas Rivas Pezoa en Coñaripe'],['reserva','Reservar','Disponibilidad, fechas y contacto por WhatsApp']]
   },
   en: {
     pageTitle: 'Rivas Pezoa Cabins | Coñaripe', description: 'Rivas Pezoa cabins in Coñaripe. Direct booking near Lake Calafquén and the Thermal Route.',
     brandSubtitle: 'Cabins · Coñaripe', navCabins: 'Cabins', navExperience: 'Experience', navLocation: 'Location', consult: 'Contact us', search: 'Search', searchAria: 'Open search',
     searchEyebrow: 'Explore the site', searchTitle: 'What are you looking for?', searchPlaceholder: 'Cabins, location, activities…', noResults: 'No results found. Try another word.',
-    promoEyebrow: 'Exclusive website offer', promoTitle: 'Get 5% off', promoCopy: 'Book directly via WhatsApp and mention code <strong>WEB5</strong> to receive your discount.', promoCta: 'Claim my discount <span>→</span>', promoLater: 'Maybe later', promoTerms: 'Subject to availability. Direct bookings only.', close: 'Close',
+    promoEyebrow: 'Exclusive website offer', promoTitle: 'Get 5% off', promoCopy: 'Book directly via WhatsApp and mention code <strong>WEB5</strong> to receive your discount.', promoCta: 'Claim my discount <span>→</span>', promoLater: 'Maybe later', promoTerms: 'Subject to availability. Direct bookings only.', instagramEyebrow: 'Follow us on Instagram', instagramTitle: 'Get inspired for your next stay', instagramCopy: 'Discover more photos, updates and beautiful Coñaripe spots at <strong>@cabanasrivaspezoa</strong>.', instagramCta: 'Follow on Instagram <span>→</span>', instagramLater: 'Not now', close: 'Close',
     sections: [['inicio','Home','A peaceful stay in Coñaripe near Lake Calafquén and the Thermal Route'],['cabanas','Our cabins','Cozy family cabins and direct booking'],['experiencia','Experience','Nature, beaches, hot springs, culture and excursions'],['ubicacion','Location','How to reach Rivas Pezoa Cabins in Coñaripe'],['reserva','Book','Availability, dates and WhatsApp contact']]
   }
 };
@@ -61,7 +61,7 @@ const searchDialog = document.querySelector('.search-dialog');
 const searchInput = document.querySelector('.search-box input');
 const searchResults = document.querySelector('.search-results');
 function openDialog(dialog) { dialog.hidden = false; document.body.classList.add('dialog-open'); }
-function closeDialog(dialog) { dialog.hidden = true; if (!document.querySelector('.search-dialog:not([hidden]), .promo-dialog:not([hidden]), .lightbox:not([hidden])')) document.body.classList.remove('dialog-open'); }
+function closeDialog(dialog) { dialog.hidden = true; if (!document.querySelector('.search-dialog:not([hidden]), .promo-dialog:not([hidden]), .instagram-dialog:not([hidden]), .lightbox:not([hidden])')) document.body.classList.remove('dialog-open'); }
 function renderSearch(query = '') {
   if (!searchResults) return;
   const words = query.trim().toLocaleLowerCase(currentLanguage);
@@ -92,17 +92,22 @@ lightbox?.querySelector('.lightbox-next')?.addEventListener('click', () => showG
 lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) closeDialog(lightbox); });
 
 const promoDialog = document.querySelector('.promo-dialog');
+const instagramDialog = document.querySelector('.instagram-dialog');
 let promoDismissedForSession = false;
 function readPromoDismissed() { try { return window.sessionStorage?.getItem('promo5Dismissed') === 'true'; } catch { return promoDismissedForSession; } }
 function savePromoDismissed() { promoDismissedForSession = true; try { window.sessionStorage?.setItem('promo5Dismissed', 'true'); } catch { /* Private browsing can disable storage. */ } }
-const dismissPromo = () => { closeDialog(promoDialog); savePromoDismissed(); };
+const dismissPromo = () => { closeDialog(promoDialog); savePromoDismissed(); window.setTimeout(() => openDialog(instagramDialog), 250); };
 document.querySelector('.promo-close')?.addEventListener('click', dismissPromo);
 document.querySelector('.promo-later')?.addEventListener('click', dismissPromo);
 document.querySelector('.promo-button')?.addEventListener('click', dismissPromo);
+document.querySelector('.instagram-close')?.addEventListener('click', () => closeDialog(instagramDialog));
+document.querySelector('.instagram-later')?.addEventListener('click', () => closeDialog(instagramDialog));
+document.querySelector('.instagram-follow')?.addEventListener('click', () => closeDialog(instagramDialog));
 window.setTimeout(() => { if (!readPromoDismissed()) openDialog(promoDialog); }, 1400);
-[searchDialog, promoDialog].forEach((dialog) => dialog?.addEventListener('click', (event) => { if (event.target === dialog) closeDialog(dialog); }));
+[searchDialog, instagramDialog].forEach((dialog) => dialog?.addEventListener('click', (event) => { if (event.target === dialog) closeDialog(dialog); }));
+promoDialog?.addEventListener('click', (event) => { if (event.target === promoDialog) dismissPromo(); });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') { if (!searchDialog.hidden) closeDialog(searchDialog); if (!promoDialog.hidden) dismissPromo(); if (!lightbox.hidden) closeDialog(lightbox); }
+  if (event.key === 'Escape') { if (!searchDialog.hidden) closeDialog(searchDialog); if (!promoDialog.hidden) dismissPromo(); else if (!instagramDialog.hidden) closeDialog(instagramDialog); if (!lightbox.hidden) closeDialog(lightbox); }
   if (!lightbox.hidden && event.key === 'ArrowLeft') showGalleryImage(activeImageIndex - 1);
   if (!lightbox.hidden && event.key === 'ArrowRight') showGalleryImage(activeImageIndex + 1);
 });
