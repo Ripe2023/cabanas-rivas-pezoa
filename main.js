@@ -87,7 +87,7 @@ function renderSearch(query = '') {
   function addResult(title, description, url, target) {
     const link = document.createElement('a');
     link.href = url;
-    if (target) link.dataset.target = target;
+    if (target) link.dataset.target = target; else { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
     const heading = document.createElement('strong');
     heading.textContent = title;
     const detail = document.createElement('span');
@@ -156,4 +156,4 @@ document.addEventListener('keydown', (event) => {
 });
 setLanguage('es');
 
-searchInput?.addEventListener('keydown', event => { if (event.key === 'Enter' && searchInput.value.trim() && !event.isComposing) { event.preventDefault(); window.location.assign(mapsSearchUrl(searchInput.value)); } });
+searchInput?.addEventListener('keydown', event => { if (event.key === 'Enter' && searchInput.value.trim() && !event.isComposing) { event.preventDefault(); window.open(mapsSearchUrl(searchInput.value), '_blank', 'noopener,noreferrer'); } });
