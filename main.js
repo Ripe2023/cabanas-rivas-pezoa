@@ -68,7 +68,7 @@ function renderSearch(query = '') {
   const results = translations[currentLanguage].sections.filter(([, title, description]) => !words || `${title} ${description}`.toLocaleLowerCase(currentLanguage).includes(words));
   searchResults.innerHTML = results.length ? results.map(([id, title, description]) => `<a href="#${id}" data-target="${id}"><strong>${title}</strong><span>${description}</span><b>→</b></a>`).join('') : `<p class="no-results">${translations[currentLanguage].noResults}</p>`;
 }
-document.querySelector('.search-toggle')?.addEventListener('click', () => { header?.classList.remove('menu-open'); renderSearch(''); openDialog(searchDialog); window.setTimeout(() => searchInput?.focus(), 50); });
+document.querySelectorAll('.search-toggle, .siteSearch').forEach(button => button.addEventListener('click', () => { header?.classList.remove('menu-open'); searchInput.value = ''; renderSearch(''); openDialog(searchDialog); window.setTimeout(() => searchInput?.focus(), 50); }));
 document.querySelector('.search-close')?.addEventListener('click', () => closeDialog(searchDialog));
 searchInput?.addEventListener('input', (event) => renderSearch(event.target.value));
 searchResults?.addEventListener('click', (event) => { const link = event.target.closest('a'); if (!link) return; event.preventDefault(); closeDialog(searchDialog); const target = link.dataset.target === 'reserva' ? document.querySelector('.booking') : document.getElementById(link.dataset.target); target?.scrollIntoView({ behavior: 'smooth' }); });
