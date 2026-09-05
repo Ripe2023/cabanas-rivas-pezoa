@@ -62,16 +62,59 @@ const searchInput = document.querySelector('.search-box input');
 const searchResults = document.querySelector('.search-results');
 function openDialog(dialog) { dialog.hidden = false; document.body.classList.add('dialog-open'); }
 function closeDialog(dialog) { dialog.hidden = true; if (!document.querySelector('.search-dialog:not([hidden]), .promo-dialog:not([hidden]), .instagram-dialog:not([hidden]), .lightbox:not([hidden])')) document.body.classList.remove('dialog-open'); }
+function normalizeSearch(value) {
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+}
+function mapsSearchUrl(query) {
+  const value = query.trim().slice(0, 200);
+  const broad = /^(atractivos|atracciones|turismo|panoramas|que hacer|attractions|things to do)$/.test(normalizeSearch(value));
+  const term = broad ? 'atractivos turísticos Coñaripe' : `${value} ${normalizeSearch(value).includes('conaripe') ? '' : 'Coñaripe'}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(term.trim())}`;
+}
+const localAttractions = [
+  ['Playa de Coñaripe', 'Playa y lago Calafquén', 'playa playas lago lagos beach lake'],
+  ['Lago Calafquén', 'Entorno natural de Coñaripe', 'lago lagos playa playas lake beach'],
+  ['Ruta Termal Coñaripe Liquiñe', 'Termas de la zona', 'terma termas aguas termales thermal hot springs'],
+  ['Fortín Mapuche Pucura', 'Cultura en el sector de Pucura', 'cultura mapuche fortin pucura culture'],
+  ['Parque Nacional Villarrica', 'Consultar accesos y condiciones antes de visitar', 'parque parques senderismo excursion excursiones naturaleza trekking hiking nature']
+];
 function renderSearch(query = '') {
   if (!searchResults) return;
-  const words = query.trim().toLocaleLowerCase(currentLanguage);
-  const results = translations[currentLanguage].sections.filter(([, title, description]) => !words || `${title} ${description}`.toLocaleLowerCase(currentLanguage).includes(words));
-  searchResults.innerHTML = results.length ? results.map(([id, title, description]) => `<a href="#${id}" data-target="${id}"><strong>${title}</strong><span>${description}</span><b>→</b></a>`).join('') : `<p class="no-results">${translations[currentLanguage].noResults}</p>`;
+  const words = normalizeSearch(query);
+  const broad = /atractiv|atraccion|turismo|panorama|que hacer|attraction|things to do/.test(words);
+  const tokens = words.split(/\s+/).filter(Boolean);
+  searchResults.replaceChildren();
+  function addResult(title, description, url, target) {
+    const link = document.createElement('a');
+    link.href = url;
+    if (target) link.dataset.target = target;
+    const heading = document.createElement('strong');
+    heading.textContent = title;
+    const detail = document.createElement('span');
+    detail.textContent = description;
+    const arrow = document.createElement('b');
+    arrow.textContent = target ? '→' : '↗';
+    link.append(heading, detail, arrow);
+    searchResults.append(link);
+  }
+  if (words) addResult(
+    broad ? 'Ver atractivos de Coñaripe en Google Maps' : `Buscar “${query.trim().slice(0, 200)}” en Coñaripe`,
+    currentLanguage === 'en' ? 'Open Google Maps results · Press Enter' : 'Abrir resultados de Google Maps · Pulsa Enter',
+    mapsSearchUrl(query)
+  );
+  for (const [id, title, description] of translations[currentLanguage].sections) {
+    const haystack = normalizeSearch(`${title} ${description}`);
+    if (!words || tokens.every(token => haystack.includes(token)) || (broad && id === 'experiencia')) addResult(title, description, `#${id}`, id);
+  }
+  if (words) for (const [title, description, keywords] of localAttractions) {
+    const haystack = normalizeSearch(`${title} ${description} ${keywords}`);
+    if (broad || tokens.every(token => haystack.includes(token))) addResult(title, `${description} · Google Maps`, mapsSearchUrl(title));
+  }
 }
 document.querySelectorAll('.search-toggle, .siteSearch').forEach(button => button.addEventListener('click', () => { header?.classList.remove('menu-open'); searchInput.value = ''; renderSearch(''); openDialog(searchDialog); window.setTimeout(() => searchInput?.focus(), 50); }));
 document.querySelector('.search-close')?.addEventListener('click', () => closeDialog(searchDialog));
 searchInput?.addEventListener('input', (event) => renderSearch(event.target.value));
-searchResults?.addEventListener('click', (event) => { const link = event.target.closest('a'); if (!link) return; event.preventDefault(); closeDialog(searchDialog); const target = link.dataset.target === 'reserva' ? document.querySelector('.booking') : document.getElementById(link.dataset.target); target?.scrollIntoView({ behavior: 'smooth' }); });
+searchResults?.addEventListener('click', (event) => { const link = event.target.closest('a'); if (!link || !link.dataset.target) return; event.preventDefault(); closeDialog(searchDialog); const target = link.dataset.target === 'reserva' ? document.querySelector('.booking') : document.getElementById(link.dataset.target); target?.scrollIntoView({ behavior: 'smooth' }); });
 
 const galleryImages = [...document.querySelectorAll('.gallery-item img')];
 const lightbox = document.querySelector('.lightbox');
@@ -112,3 +155,5 @@ document.addEventListener('keydown', (event) => {
   if (!lightbox.hidden && event.key === 'ArrowRight') showGalleryImage(activeImageIndex + 1);
 });
 setLanguage('es');
+
+searchInput?.addEventListener('keydown', event => { if (event.key === 'Enter' && searchInput.value.trim() && !event.isComposing) { event.preventDefault(); window.location.assign(mapsSearchUrl(searchInput.value)); } });
