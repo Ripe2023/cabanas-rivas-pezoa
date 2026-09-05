@@ -1,0 +1,21 @@
+/* Seasonal presentation; original cabin photographs remain unchanged. */
+body.fiestasPatrias{--forest:#173866;--forest-dark:#102442;--cream:#f8f9fc;--sand:#dfe5ef;--rust:#bd2836;--ink:#192b43}
+.fiestasPatrias .header{border-top:5px solid #bd2836;background:linear-gradient(90deg,#102442e8,#10244280);height:87px}
+.fiestasPatrias .brand-mark{background:#fff;color:#173866;border-color:#fff}
+.fiestasPatrias .hero{border-bottom:8px solid transparent;border-image:linear-gradient(90deg,#173866 0 33.33%,#fff 33.33% 66.66%,#bd2836 66.66%) 1}
+.fiestasPatrias .hero-shade{background:linear-gradient(90deg,#0e2443e8 0%,#102442a3 48%,#10244214),linear-gradient(0deg,#1024428c,transparent 50%)}
+.fiestasPatrias .hero h1{font-size:clamp(48px,6.5vw,94px)}
+.fiestasPatrias .hero h1 em{color:#fff}
+.fiestasPatrias .hero .eyebrow{color:#fff;letter-spacing:.15em;display:flex;gap:12px;align-items:center}
+.fiestasPatrias .hero .eyebrow span{font-size:25px}
+.fiestasPatrias .hero .button.primary{background:#bd2836;border:1px solid #e89199;box-shadow:0 5px 20px #0002}
+.fiestasPatrias .hero-copy{color:#f1f5fc}
+.fiestasPatrias .experience,.fiestasPatrias .booking,.fiestasPatrias .promo-card{background:#173866}
+.fiestasPatrias .booking{border-top:7px solid #bd2836}
+.fiestasPatrias .booking h2{max-width:900px;margin-left:auto;margin-right:auto}
+.fiestasPatrias .cabin-card{border-bottom:4px solid #bd2836}
+.fiestasPatrias .section-head .eyebrow,.fiestasPatrias .intro .eyebrow{color:#b42331}
+.fiestasPatrias .chatLauncher,.fiestasPatrias .chatForm button,.fiestasPatrias .chatBubble.visitor{background:#173866}
+.fiestasPatrias .chatPanel header{background:#102442;border-top:5px solid #bd2836}
+.fiestasPatrias .siteSearch{color:#173866;border-color:#ccd6e5}
+@media(max-width:600px){.fiestasPatrias .hero-content{padding-top:100px}.fiestasPatrias .hero .eyebrow{font-size:10px;letter-spacing:.08em}.fiestasPatrias .hero h1{font-size:clamp(43px,10vw,60px)}.fiestasPatrias .hero-copy{font-size:16px}}

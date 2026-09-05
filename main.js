@@ -23,8 +23,8 @@ const translations = {
 };
 
 const englishContent = {
-  '.hero .eyebrow': 'Panguipulli · Los Ríos Region', '.hero h1': 'Your peaceful stay<br><em>in Coñaripe</em>',
-  '.hero-copy': 'Cozy cabins for enjoying southern Chile, Lake Calafquén, the Thermal Route and the peaceful atmosphere of Coñaripe.', '.hero-actions .primary': 'Check availability <span>→</span>', '.hero-actions .text-link': 'View cabins',
+  '.hero .eyebrow': 'September · Celebrate in southern Chile', '.hero h1': 'Chilean National Holidays<br><em>in Coñaripe</em>',
+  '.hero-copy': 'Celebrate the September holidays with a family getaway to Coñaripe. Enjoy Lake Calafquén and the Thermal Route. Ask about dates and availability.', '.hero-actions .primary': 'Check availability <span>→</span>', '.hero-actions .text-link': 'View cabins',
   '.intro .eyebrow': 'A simple and welcoming stay', '.intro h2': 'Rest and discover the landscapes of southern Chile.', '.intro-copy > p': 'We are in Coñaripe, an ideal base for exploring the town, discovering the Thermal Route to Liquiñe and enjoying the area’s many attractions.',
   '.mini-features span:nth-child(1)': '✓ Peaceful surroundings', '.mini-features span:nth-child(2)': '✓ Parking', '.mini-features span:nth-child(3)': '✓ Direct booking', '.mini-features span:nth-child(4)': '✓ WhatsApp assistance',
   '.cabins .section-head .eyebrow': 'Your stay in Coñaripe', '.cabins .section-head h2': 'Our cabins', '.cabins .section-head > p': 'Welcoming spaces where you can relax and enjoy the area. Ask about availability and details directly on WhatsApp.',
@@ -34,7 +34,7 @@ const englishContent = {
   '.experience .eyebrow': 'Experience Coñaripe', '.experience h2': 'Nature, water and culture.', '.experience-copy > p:not(.eyebrow)': 'From Coñaripe you can follow the Thermal Route toward Liquiñe, visit Lake Calafquén and discover the Mapuche Fort in Pucura.',
   '.experience-list span:nth-child(1)': '<b>01</b>Coñaripe Beach and Lake Calafquén', '.experience-list span:nth-child(2)': '<b>02</b>Coñaripe–Liquiñe Thermal Route', '.experience-list span:nth-child(3)': '<b>03</b>Pucura Mapuche Fort', '.experience-list span:nth-child(4)': '<b>04</b>Local food and shops', '.experience-list span:nth-child(5)': '<b>05</b>Trips to Villarrica National Park', '.quote-card p': 'Coñaripe welcomes you all year round.',
   '.gallery .eyebrow': 'Real photos', '.gallery h2': 'Experience your stay', '.gallery .text-link': 'See more on Instagram →', '.reviews-copy .eyebrow': 'Google reviews', '.reviews-copy h2': 'Discover our guests’ experiences.', '.reviews-copy > p': 'Read real reviews of Rivas Pezoa Cabins on Google Maps and share your experience after your stay.', '.google-rating strong': 'Current rating and reviews on Google Maps', '.reviews-button': 'View reviews on Google <span>→</span>', '.location-copy .eyebrow': 'How to get here', '.location-copy > p': 'Panguipulli, Los Ríos Region, Chile. Find us on Google Maps and message us before travelling for directions and arrival tips.', '.location-copy .text-link': 'Open in Google Maps →',
-  '.booking .eyebrow': 'Direct booking', '.booking h2': 'Ready to visit Coñaripe?', '.booking > p:not(.eyebrow)': 'Tell us your dates and how many guests are travelling.', '.booking small': 'Direct reply · no intermediaries',
+  '.booking .eyebrow': 'Direct booking', '.booking h2': 'A September getaway to Coñaripe', '.booking > p:not(.eyebrow)': 'Tell us your dates and how many guests are travelling.', '.booking small': 'Direct reply · no intermediaries',
   'footer .brand [data-i18n="brandSubtitle"]': 'Cabins · Coñaripe', 'footer > div:nth-child(2) span': 'Panguipulli, Los Ríos Region'
 };
 const originalContent = new Map();
