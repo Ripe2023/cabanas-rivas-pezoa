@@ -135,6 +135,9 @@ lightbox?.querySelector('.lightbox-next')?.addEventListener('click', () => showG
 lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) closeDialog(lightbox); });
 
 const instagramDialog = document.querySelector('.instagram-dialog');
+window.setTimeout(() => {
+  if (instagramDialog && !document.body.classList.contains('dialog-open')) openDialog(instagramDialog);
+}, 1400);
 document.querySelector('.instagram-close')?.addEventListener('click', () => closeDialog(instagramDialog));
 document.querySelector('.instagram-later')?.addEventListener('click', () => closeDialog(instagramDialog));
 document.querySelector('.instagram-follow')?.addEventListener('click', () => closeDialog(instagramDialog));
