@@ -36,7 +36,7 @@ export function answer(question) {
   if (/mascota|perro|gato|pet/.test(text)) return 'Consulta por WhatsApp si podemos recibir a tu mascota antes de reservar. No tengo una política de mascotas confirmada.';
   if (/horario|check|entrada|salida|llegada/.test(text)) return 'Coordina por WhatsApp los horarios de entrada y salida, y avísanos si necesitas llegar a una hora especial.';
   if (/precio|cuanto|costo|tarifa|valor|presupuesto/.test(text)) return 'Para cotizar, envíanos por WhatsApp tus fechas de entrada y salida y cuántas personas viajan. No tengo tarifas ni disponibilidad en tiempo real.';
-  if (/descuento|web5|promocion|oferta/.test(text)) return 'La web anuncia un 5% de descuento con el código WEB5 para reserva directa por WhatsApp, sujeto a disponibilidad. Confirma su aplicación al cotizar.';
+  if (/descuento|web5|promocion|oferta/.test(text)) return 'Consulta las tarifas y condiciones vigentes directamente por WhatsApp con el equipo de Cabañas Rivas Pezoa.';
   if (/ubicacion|direccion|donde|llegar/.test(text)) return 'Estamos en Coñaripe, comuna de Panguipulli, Región de Los Ríos. Busca Cabañas Rivas Pezoa en Google Maps o escríbenos para recibir la ubicación y las indicaciones de llegada.';
   if (/estacionamiento|auto|vehiculo/.test(text)) return 'Contamos con estacionamiento, según la información de nuestra web. Si viajas con varios vehículos, consulta los detalles por WhatsApp.';
   if (/wifi|internet|piscina|tinaja|acceso|silla|cama|capacidad|personas|equipamiento/.test(text)) return 'Para confirmar capacidad, distribución y equipamiento de la cabaña disponible, cuéntanos cuántas personas viajan y qué necesitan por WhatsApp. No tengo esos detalles confirmados para cada cabaña.';
